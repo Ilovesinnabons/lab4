@@ -274,33 +274,6 @@ body {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Анимация снежинок */
 .snowflakes {
     position: fixed;
     top: 0;
@@ -328,7 +301,6 @@ body {
     }
 }
 
-/* Создание множества снежинок с разными параметрами */
 .snowflake:nth-child(1) { left: 5%; animation-duration: 10s; animation-delay: 0s; }
 .snowflake:nth-child(2) { left: 15%; animation-duration: 12s; animation-delay: 1s; }
 .snowflake:nth-child(3) { left: 25%; animation-duration: 8s; animation-delay: 2s; }
@@ -350,9 +322,6 @@ body {
 .snowflake:nth-child(19) { left: 90%; animation-duration: 9s; animation-delay: 6.5s; }
 .snowflake:nth-child(20) { left: 7%; animation-duration: 13s; animation-delay: 9s; }
 
-/* Анимация мерцающих звездочек */
-/* Анимация мерцающих звездочек */
-/* Анимация мерцающих звездочек *//* Анимация мерцающих звездочек */
 @keyframes sparkle {
     0% {
         opacity: 0.2;
@@ -390,13 +359,41 @@ body {
     text-shadow: 0 0 20px currentColor;
 }
 
-/* Делаем контейнер карточек относительным для позиционирования звезд */
 .cards {
     position: relative;
 }
 
-/* Добавляем легкое свечение самим карточкам когда есть звездочки */
 .cards:has(.sparkle-star) .order-card {
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 30px rgba(229, 190, 130, 0.3);
     transition: box-shadow 0.5s ease;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fallDown {
+    0% {
+        top: 0;
+    }
+    100% {
+        top: calc(100vh - 200px);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

@@ -1,54 +1,88 @@
-// stars.js
 document.addEventListener('DOMContentLoaded', function() {
     const allProjectsButton = document.querySelector('.header__nav .header__project-type:first-child');
     const otherButtons = document.querySelectorAll('.header__nav .header__project-type:not(:first-child)');
     const cardsContainer = document.querySelector('.cards');
-    let starsActive = false;
     let colorChangeInterval;
-    let currentEffect = null;
+    let starsUpdateInterval;
+    let stars = [];
     
-    // Обработчик для "Все проекты"
+
     allProjectsButton.addEventListener('click', function() {
-        if (starsActive && currentEffect === 'stars') {
-            // Выключаем звездочки
-            removeEffects();
+        if (allProjectsButton.classList.contains('stars-active')) {
+            removeStarsEffect();
             stopColorChanging();
-            removeActiveClass();
-            starsActive = false;
-            currentEffect = null;
+            stopStarsUpdate();
+            allProjectsButton.classList.remove('stars-active');
         } else {
-            // Включаем звездочки
-            removeEffects();
             createSparklingStars();
             startColorChanging();
-            removeActiveClass();
+            startStarsUpdate();
             allProjectsButton.classList.add('stars-active');
-            starsActive = true;
-            currentEffect = 'stars';
         }
     });
     
-    // Обработчики для других кнопок
     otherButtons.forEach((button, index) => {
         button.addEventListener('click', function() {
-            removeEffects();
-            stopColorChanging();
-            removeActiveClass();
-            starsActive = false;
-            currentEffect = null;
+            if (button.classList.contains(getActiveClass(index))) {
+                removeProjectEffect(index);
+                button.classList.remove(getActiveClass(index));
+            } else {
+                createProjectEffect(index);
+                button.classList.add(getActiveClass(index));
+            }
+            
+            if (allProjectsButton.classList.contains('stars-active')) {
+                updateStarsPositions();
+            }
         });
     });
     
-    function removeActiveClass() {
-        const buttons = document.querySelectorAll('.header__project-type');
-        buttons.forEach(btn => {
-            btn.classList.remove('stars-active', 'blue-active', 'green-active', 'red-active', 'pink-active');
-        });
+    function getActiveClass(index) {
+        const classes = ['blue-active', 'green-active', 'red-active', 'pink-active'];
+        return classes[index];
     }
     
-    function removeEffects() {
-        const effects = document.querySelectorAll('.sparkle-star');
-        effects.forEach(effect => effect.remove());
+    function removeStarsEffect() {
+        stars.forEach(star => star.element.remove());
+        stars = [];
+        stopStarsUpdate();
+    }
+    
+    function removeProjectEffect(index) {
+        const cards = document.querySelectorAll('.order-card');
+        
+        switch(index) {
+            case 0: 
+                cards.forEach(card => {
+                    if (card.classList.contains('order-card--blue')) {
+                        card.style.background = '';
+                    }
+                });
+                break;
+            case 1: 
+                cards.forEach(card => {
+                    if (card.classList.contains('order-card--green')) {
+                        card.style.animation = '';
+                    }
+                });
+                break;
+            case 2: 
+                cards.forEach(card => {
+                    if (card.classList.contains('order-card--red')) {
+                        card.style.animation = '';
+                        card.style.position = '';
+                        card.style.top = '';
+                    }
+                });
+                break;
+            case 3:
+                cards.forEach(card => {
+                    if (card.classList.contains('order-card--pink')) {
+                        card.style.animation = '';
+                    }
+                });
+                break;
+        }
     }
     
     function stopColorChanging() {
@@ -58,21 +92,76 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    function stopStarsUpdate() {
+        if (starsUpdateInterval) {
+            clearInterval(starsUpdateInterval);
+            starsUpdateInterval = null;
+        }
+    }
+    
     function startColorChanging() {
         colorChangeInterval = setInterval(() => {
-            const stars = document.querySelectorAll('.sparkle-star');
             stars.forEach(star => {
-                star.style.color = getRandomColor();
+                star.element.style.color = getRandomColor();
             });
         }, 1000);
     }
     
+    function startStarsUpdate() {
+        starsUpdateInterval = setInterval(() => {
+            updateStarsPositions();
+        }, 100); 
+    }
+    
+    function updateStarsPositions() {
+        const cards = document.querySelectorAll('.order-card');
+        const containerRect = cardsContainer.getBoundingClientRect();
+        
+        cards.forEach((card, cardIndex) => {
+            const cardStars = stars.filter(star => star.cardIndex === cardIndex);
+            const cardRect = card.getBoundingClientRect();
+            
+            const cardLeft = cardRect.left - containerRect.left;
+            const cardTop = cardRect.top - containerRect.top;
+            const cardWidth = cardRect.width;
+            const cardHeight = cardRect.height;
+            
+            cardStars.forEach((star, starIndex) => {
+                let left, top;
+                const positionType = star.positionType;
+                const positionIndex = star.positionIndex;
+                
+                switch(positionType) {
+                    case 'left':
+                        left = cardLeft - 20;
+                        top = cardTop + (cardHeight * (positionIndex/12));
+                        break;
+                    case 'right':
+                        left = cardLeft + cardWidth + 5;
+                        top = cardTop + (cardHeight * (positionIndex/12));
+                        break;
+                    case 'top':
+                        left = cardLeft + (cardWidth * (positionIndex/12));
+                        top = cardTop - 20;
+                        break;
+                    case 'bottom':
+                        left = cardLeft + (cardWidth * (positionIndex/12));
+                        top = cardTop + cardHeight + 5;
+                        break;
+                }
+                
+                star.element.style.left = left + 'px';
+                star.element.style.top = top + 'px';
+            });
+        });
+    }
+    
     function createSparklingStars() {
         const cards = document.querySelectorAll('.order-card');
+        const containerRect = cardsContainer.getBoundingClientRect();
         
         cards.forEach((card, cardIndex) => {
             const cardRect = card.getBoundingClientRect();
-            const containerRect = cardsContainer.getBoundingClientRect();
             
             const cardLeft = cardRect.left - containerRect.left;
             const cardTop = cardRect.top - containerRect.top;
@@ -85,20 +174,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 star.innerHTML = '✦';
                 
                 let left, top;
+                let positionType, positionIndex;
+                
                 switch(i % 4) {
                     case 0:
+                        positionType = 'left';
+                        positionIndex = i;
                         left = cardLeft - 20;
                         top = cardTop + (cardHeight * (i/12));
                         break;
                     case 1:
+                        positionType = 'right';
+                        positionIndex = i;
                         left = cardLeft + cardWidth + 5;
                         top = cardTop + (cardHeight * (i/12));
                         break;
                     case 2:
+                        positionType = 'top';
+                        positionIndex = i;
                         left = cardLeft + (cardWidth * (i/12));
                         top = cardTop - 20;
                         break;
                     case 3:
+                        positionType = 'bottom';
+                        positionIndex = i;
                         left = cardLeft + (cardWidth * (i/12));
                         top = cardTop + cardHeight + 5;
                         break;
@@ -116,13 +215,57 @@ document.addEventListener('DOMContentLoaded', function() {
                     animationDelay: Math.random() * 2 + 's',
                     filter: `blur(${Math.random() * 2}px)`,
                     opacity: '0.8',
-                    transition: 'color 0.5s ease'
+                    transition: 'color 0.5s ease, left 0.1s ease, top 0.1s ease'
                 });
                 
                 cardsContainer.style.position = 'relative';
                 cardsContainer.appendChild(star);
+                
+                stars.push({
+                    element: star,
+                    cardIndex: cardIndex,
+                    positionType: positionType,
+                    positionIndex: positionIndex
+                });
             }
         });
+    }
+    
+    function createProjectEffect(index) {
+        const cards = document.querySelectorAll('.order-card');
+        
+        switch(index) {
+            case 0: 
+                cards.forEach(card => {
+                    if (card.classList.contains('order-card--blue')) {
+                        card.style.background = '#a5c6fa41';
+                        card.style.transition = 'background 0.5s ease';
+                    }
+                });
+                break;
+            case 1: 
+                cards.forEach(card => {
+                    if (card.classList.contains('order-card--green')) {
+                        card.style.animation = 'pulse 1s infinite ease-in-out';
+                    }
+                });
+                break;
+            case 2: 
+                cards.forEach(card => {
+                    if (card.classList.contains('order-card--red')) {
+                        card.style.position = 'relative';
+                        card.style.animation = `fallDown 2s forwards ease-in`;
+                    }
+                });
+                break;
+            case 3: 
+                cards.forEach(card => {
+                    if (card.classList.contains('order-card--pink')) {
+                        card.style.animation = 'rotate 3s infinite linear';
+                    }
+                });
+                break;
+        }
     }
     
     function getRandomColor() {

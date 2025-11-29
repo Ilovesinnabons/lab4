@@ -1,0 +1,402 @@
+:root {
+    --gray-color: #dfdfdf;
+    --background-color: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    color: #202020;
+    background: var(--background-color);
+}
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.header {
+    width: 280px;
+    background: var(--background-color);
+    border-right: 1px solid var(--gray-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header__inner {
+    flex-direction: column;
+    padding: 24px 16px;
+    flex-grow: 1;
+    justify-content: flex-start;
+}
+
+.brand__icon {
+    color: #202020;
+}
+
+.brand__name,
+.header__user {
+    font-size: 18px;
+}
+
+.header__project-type {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.header__project-type:hover {
+    background: #f5f5f5;
+}
+
+.brand {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-weight: 700;
+    margin-bottom: 32px;
+}
+
+.search-box {
+    margin-bottom: 24px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #9b9b9b;
+}
+
+.header__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--gray-color);
+}
+
+.container {
+    flex-grow: 1;
+    padding: 24px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 24px;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+}
+
+.filter-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid var(--gray-color);
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    margin: 24px;
+}
+
+.filter:focus {
+    outline: none;
+    border-color: #9b9b9b;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid var(--gray-color);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.filter-dropdown:focus-within .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background: #f5f5f5;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+
+.order-card {
+    position: relative;
+    background: var(--background-color);
+    border: 1px solid var(--gray-color);
+    border-radius: 5px;
+    padding: 16px;
+    grid-column: span 3;
+    overflow: hidden;
+}
+
+.order-card::before {
+    content: '';
+    position: absolute;
+    height: 6px;
+    width: 30%;
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.order-card--blue::before {
+    background: #3b82f6;
+}
+
+.order-card--green::before {
+    background: #10b981;
+}
+
+.order-card--red::before {
+    background: #ef4444;
+}
+
+.order-card--pink::before {
+    background: #ec4899;
+}
+
+.order-card__name {
+    font-size: 20px;
+    font-weight: 600;
+    display: block;
+    margin: 24px 0;
+}
+
+.order-card__description {
+    color: #6b7288;
+    margin-bottom: 16px;
+}
+
+.info {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.info__label {
+    color: #6b7288;
+    font-size: 0.9em;
+}
+
+.sidebar-footer {
+    color: #6b7288;
+    font-size: 12px;
+    padding: 16px;
+    border-top: 1px solid var(--gray-color);
+    margin-top: auto;
+    text-align: center;
+}
+
+@media (max-width: 1000px) {
+    .order-card {
+        grid-column: span 6;
+    }
+}
+
+@media (max-width: 640px) {
+    .order-card {
+        grid-column: span 12;
+    }
+
+    .header__inner {
+        padding: 12px 16px;
+    }
+
+    .container {
+        padding: 16px;
+    }
+
+    .title {
+        font-size: 22px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Анимация снежинок */
+.snowflakes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: #e0f2fe;
+    font-size: 1em;
+    user-select: none;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+/* Создание множества снежинок с разными параметрами */
+.snowflake:nth-child(1) { left: 5%; animation-duration: 10s; animation-delay: 0s; }
+.snowflake:nth-child(2) { left: 15%; animation-duration: 12s; animation-delay: 1s; }
+.snowflake:nth-child(3) { left: 25%; animation-duration: 8s; animation-delay: 2s; }
+.snowflake:nth-child(4) { left: 35%; animation-duration: 14s; animation-delay: 0.5s; }
+.snowflake:nth-child(5) { left: 45%; animation-duration: 11s; animation-delay: 3s; }
+.snowflake:nth-child(6) { left: 55%; animation-duration: 9s; animation-delay: 1.5s; }
+.snowflake:nth-child(7) { left: 65%; animation-duration: 13s; animation-delay: 2.5s; }
+.snowflake:nth-child(8) { left: 75%; animation-duration: 10s; animation-delay: 0.8s; }
+.snowflake:nth-child(9) { left: 85%; animation-duration: 12s; animation-delay: 4s; }
+.snowflake:nth-child(10) { left: 95%; animation-duration: 15s; animation-delay: 1.2s; }
+.snowflake:nth-child(11) { left: 10%; animation-duration: 11s; animation-delay: 5s; }
+.snowflake:nth-child(12) { left: 20%; animation-duration: 9s; animation-delay: 3.5s; }
+.snowflake:nth-child(13) { left: 30%; animation-duration: 13s; animation-delay: 2.8s; }
+.snowflake:nth-child(14) { left: 40%; animation-duration: 10s; animation-delay: 6s; }
+.snowflake:nth-child(15) { left: 50%; animation-duration: 12s; animation-delay: 4.5s; }
+.snowflake:nth-child(16) { left: 60%; animation-duration: 8s; animation-delay: 7s; }
+.snowflake:nth-child(17) { left: 70%; animation-duration: 14s; animation-delay: 5.5s; }
+.snowflake:nth-child(18) { left: 80%; animation-duration: 11s; animation-delay: 8s; }
+.snowflake:nth-child(19) { left: 90%; animation-duration: 9s; animation-delay: 6.5s; }
+.snowflake:nth-child(20) { left: 7%; animation-duration: 13s; animation-delay: 9s; }
+
+/* Анимация мерцающих звездочек */
+/* Анимация мерцающих звездочек */
+/* Анимация мерцающих звездочек *//* Анимация мерцающих звездочек */
+@keyframes sparkle {
+    0% {
+        opacity: 0.2;
+        transform: scale(0.7) rotate(0deg);
+        filter: brightness(0.8) drop-shadow(0 0 3px currentColor) blur(1px);
+    }
+    25% {
+        opacity: 0.9;
+        transform: scale(1.2) rotate(90deg);
+        filter: brightness(1.4) drop-shadow(0 0 8px currentColor) blur(0.5px);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5) rotate(180deg);
+        filter: brightness(1.8) drop-shadow(0 0 15px currentColor) blur(0px);
+    }
+    75% {
+        opacity: 0.7;
+        transform: scale(1.1) rotate(270deg);
+        filter: brightness(1.2) drop-shadow(0 0 6px currentColor) blur(0.5px);
+    }
+    100% {
+        opacity: 0.2;
+        transform: scale(0.7) rotate(360deg);
+        filter: brightness(0.8) drop-shadow(0 0 3px currentColor) blur(1px);
+    }
+}
+
+.sparkle-star {
+    position: absolute;
+    font-size: 18px;
+    z-index: 1000;
+    pointer-events: none;
+    animation: sparkle 3s infinite ease-in-out;
+    text-shadow: 0 0 20px currentColor;
+}
+
+/* Делаем контейнер карточек относительным для позиционирования звезд */
+.cards {
+    position: relative;
+}
+
+/* Добавляем легкое свечение самим карточкам когда есть звездочки */
+.cards:has(.sparkle-star) .order-card {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    transition: box-shadow 0.5s ease;
+}

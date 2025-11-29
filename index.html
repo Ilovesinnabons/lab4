@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Отслеживание грузов</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-layout">
+        <header class="header">
+            <div class="header__inner">
+                <div class="brand">
+                    <i class="brand__icon fa-solid fa-asterisk"></i>
+                    <span class="brand__name">Вариант 12</span>
+                </div>
+                <div class="search-box">
+                    <input type="text" placeholder="Поиск..." class="search-input">
+                </div>
+                <nav class="header__nav">
+                    <button class="header__project-type">Все проекты</button>
+                    <button class="header__project-type">Синий проект</button>
+                    <button class="header__project-type">Зелёный проект</button>
+                    <button class="header__project-type">Красный проект</button>
+                    <button class="header__project-type">Розовый проект</button>
+                </nav>
+            </div>
+            <footer class="sidebar-footer">
+                © Вариант 12. Русских Анна, группа ИСПРВ-17-1
+            </footer>
+        </header>
+
+        <main class="main-content">
+            <div class="head">
+                <h1 class="title">Все проекты</h1>
+                <div class="toolbar">
+                    <div class="filter-dropdown">
+                        <button class="filter">
+                            <span>По умолчанию</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <button class="dropdown-item">По умолчанию</button>
+                            <button class="dropdown-item">Истекают раньше</button>
+                            <button class="dropdown-item">Истекают позже</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <section class="cards">
+                    <article class="order-card order-card--blue">
+                        <span class="order-card__name">Название первой задачи</span>
+                        <div class="order-card__description">Описание задачи</div>
+                        <div class="order-card__grid">
+                            <div class="info">
+                                <div class="info__label">Истекает:</div>
+                                <div class="info__value">16 июля 2023 года</div>
+                            </div>
+                            <div class="info">
+                                <div class="info__label">Ответственный:</div>
+                                <div class="info__value">Островский Константин</div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="order-card order-card--green">
+                        <span class="order-card__name">Название второй задачи</span>
+                        <div class="order-card__description">Описание задачи</div>
+                        <div class="order-card__grid">
+                            <div class="info">
+                                <div class="info__label">Истекает:</div>
+                                <div class="info__value">19 июля 2023 года</div>
+                            </div>
+                            <div class="info">
+                                <div class="info__label">Ответственный:</div>
+                                <div class="info__value">Островский Константин</div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="order-card order-card--red">
+                        <span class="order-card__name">Название третьей задачи</span>
+                        <div class="order-card__description">Описание задачи</div>
+                        <div class="order-card__grid">
+                            <div class="info">
+                                <div class="info__label">Истекает:</div>
+                                <div class="info__value">08 августа 2023 года</div>
+                            </div>
+                            <div class="info">
+                                <div class="info__label">Ответственный:</div>
+                                <div class="info__value">Островский Константин</div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="order-card order-card--pink">
+                        <span class="order-card__name">Название четвёртой задачи</span>
+                        <div class="order-card__description">Описание задачи</div>
+                        <div class="order-card__grid">
+                            <div class="info">
+                                <div class="info__label">Истекает:</div>
+                                <div class="info__value">19 декабря 2023 года</div>
+                            </div>
+                            <div class="info">
+                                <div class="info__label">Ответственный:</div>
+                                <div class="info__value">Островский Константин</div>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </main>
+    </div>
+
+
+    <!-- Снежинки -->
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+    </div>
+
+    <script src="stars.js"></script>
+</body>
+
+</html>
